@@ -20,9 +20,24 @@ public class CounterController {
 	@GetMapping("/counter")
 	public String counter(HttpSession session, Model model) {
 		Integer counter = (Integer) session.getAttribute("count");
-		model.addAttribute("counter", counter++);
-		session.setAttribute("count", counter);
+		model.addAttribute("counter", counter);
+		session.setAttribute("count", counter + 1);
 //		System.out.println(session.getAttribute("count"));
 		return "counter.jsp";
+	}
+	
+	@GetMapping("/counter/2")
+	public String counter2(HttpSession session, Model model) {
+		Integer counter = (Integer) session.getAttribute("count");
+		model.addAttribute("counter", counter);
+		session.setAttribute("count", counter + 2);
+//		System.out.println(session.getAttribute("count"));
+		return "counter2.jsp";
+	}
+	
+	@GetMapping("/reset")
+	public String reset(HttpSession session) {
+		session.setAttribute("count", 1);
+		return "index.jsp";
 	}
 }
